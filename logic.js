@@ -107,10 +107,15 @@ const SearchField = (() => {
     response = await response.json();
     return response;
   }
-  const search = async () => {
+  const search = async (ip_address = undefined) => {
     if (searchField.value.trim().length) {
       document.querySelector(".suggestions").innerHTML = "";
       let results = await get_3days_forecast(searchField.value.trim());
+      let forecast_data = getForecastData(results);
+      return forecast_data;
+    }
+    if (ip_address) {
+      let results = await get_3days_forecast(ip_address);
       let forecast_data = getForecastData(results);
       return forecast_data;
     }
@@ -257,7 +262,7 @@ const days = [day_0, day_1, day_2];
 days.forEach((day) => {
   day.addEventListener("click", async (e) => {
     const forecast = await SearchField.search();
-    fillHourlyHorecast(e, day, forecast);
+    if (forecast) fillHourlyHorecast(e, day, forecast);
   });
 });
 
@@ -286,6 +291,13 @@ const displayRightDegree = () => {
     });
   }
 };
+window.addEventListener("load", async (event) => {
+  let ip_address = await fetch("https://api.ipify.org?format=json");
+  ip_address = await ip_address.json();
+  const forecast = await SearchField.search(ip_address.ip);
+  if (forecast) fillHourlyHorecast(event, day_0, forecast);
+});
+
 const degreeBtn = document.querySelector(".degree");
 degreeBtn.addEventListener("click", (e) => {
   const span_c = document.querySelector(".degree span[degree = 'c']");
@@ -299,5 +311,5 @@ const form = document.querySelector(".search-box .search-form");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const forecast = await SearchField.search();
-  fillHourlyHorecast(e, day_0, forecast);
+  if (forecast) fillHourlyHorecast(e, day_0, forecast);
 });
