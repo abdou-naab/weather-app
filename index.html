@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <script src="logic.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">WEATHER</div>
+      <div class="search-box">
+        <!-- active -->
+        <form class="search-form">
+          <input
+            id="search-field"
+            type="text"
+            placeholder="search for a country, city, place, ..."
+            autocomplete="off"
+          />
+          <button id="search-btn" type="submit">search</button>
+        </form>
+        <ul class="suggestions"></ul>
+      </div>
+      <button class="degree">
+        <span class="c active-degree">°C</span> / <span class="f">°F</span>
+      </button>
+    </header>
+    <div class="days-selection flex-row">
+      <div day="0" class="day00 current-day">
+        <div class="flex-column">
+          <span>Today</span>
+          <span class="date"></span>
+        </div>
+      </div>
+      <div day="1" class="day01">
+        <div class="flex-column">
+          <span>Tomorrow</span>
+          <span class="date"></span>
+        </div>
+      </div>
+      <div day="2" class="day02">
+        <div class="flex-column">
+          <span>After Tomorrow</span>
+          <span class="date"></span>
+        </div>
+      </div>
+    </div>
+    <div class="today main">
+      <div class="flex-column">
+        <div class="flex-column">
+          <span class="loc-info"></span>
+          <span class="data-info"></span>
+        </div>
+
+        <div class="temp flex-row big-img" style="justify-content: center">
+          <span class="big-number">
+            <span class="c"></span>
+            <span class="f"></span>
+          </span>
+
+          <img src="" alt="" />
+          <span class="big-number"></span>
+        </div>
+      </div>
+    </div>
+    <div class="today">
+      <div class="flex-row">
+        <div class="flex-column sml-img">
+          <span>chance of rain</span>
+          <img
+            src="https://img.icons8.com/color/48/000000/rain--v1.png"
+            alt="rain"
+          />
+
+          <span class="rain-chance"></span>
+        </div>
+        <div class="flex-column sml-img wind">
+          <span>wind</span>
+          <img
+            src="https://img.icons8.com/ios/50/000000/wind--v1.png"
+            alt="wind"
+          />
+          <span>
+            <span class="c"></span>
+            <span class="f"></span>
+          </span>
+        </div>
+        <div class="flex-column sml-img">
+          <span>visibility</span>
+          <img src="visibility.png" alt="rain" />
+
+          <span class="visibility">
+            <span class="c"></span>
+            <span class="f"></span>
+          </span>
+        </div>
+        <div class="flex-column sml-img">
+          <span>humidity</span>
+          <img src="humidity.png" alt="rain" />
+          <span><span class="humidity"></span></span>
+        </div>
+      </div>
+    </div>
+    <div class="today-hourly flex-row"></div>
+
+    <div class="sml-img flex-row">
+      <div class="flex-column sunrise">
+        <img src="sunrise.png" alt="sunrise" />
+        <span></span>
+      </div>
+
+      <div class="flex-column sunset">
+        <img src="sunset.png" alt="sunset" />
+        <span></span>
+      </div>
+    </div>
+  </body>
+</html>
