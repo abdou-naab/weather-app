@@ -105,6 +105,7 @@ header {
   align-items: center;
   justify-items: center;
 }
+
 /*  */
 body {
   color: var(--blue1);
@@ -188,13 +189,13 @@ footer {
   font-weight: bold;
   border-bottom: 2px solid var(--red);
 }
-.today-hourly::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: auto;
 }
-.today-hourly::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: var(--blue3);
 }
-.today-hourly::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background-color: var(--blue2);
   border-radius: 20px;
   border: 3px solid var(--blue3);

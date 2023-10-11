@@ -1,5 +1,4 @@
 document.cookie = "key=value; SameSite=None; Secure";
-
 const api_key = "?key=bd1cc97dc32d403894f93847230310";
 const base_url = "http://api.weatherapi.com/v1";
 const curr_weather_api = "/current.json";
@@ -104,15 +103,23 @@ const SearchField = (() => {
     let response = await fetch(
       base_url + forcast_api + api_key + "&q=" + loc + "&days=3"
     );
-    response = await response.json();
-    return response;
+    if (!response.ok) {
+      searchField.value = "";
+      searchField.setAttribute("placeholder", "Enter a valid location!");
+      return undefined;
+    } else {
+      response = await response.json();
+      return response;
+    }
   }
   const search = async (ip_address = undefined) => {
     if (searchField.value.trim().length) {
       document.querySelector(".suggestions").innerHTML = "";
       let results = await get_3days_forecast(searchField.value.trim());
-      let forecast_data = getForecastData(results);
-      return forecast_data;
+      if (results) {
+        let forecast_data = getForecastData(results);
+        return forecast_data;
+      }
     }
     if (ip_address) {
       let results = await get_3days_forecast(ip_address);
@@ -261,7 +268,12 @@ const day_2 = document.querySelector("[day='2']");
 const days = [day_0, day_1, day_2];
 days.forEach((day) => {
   day.addEventListener("click", async (e) => {
-    const forecast = await SearchField.search();
+    let ip_address = undefined;
+    let ip_value = undefined;
+    ip_address = await fetch("https://api.ipify.org?format=json");
+    ip_address = await ip_address.json();
+    ip_value = ip_address.ip;
+    const forecast = await SearchField.search(ip_value);
     if (forecast) fillHourlyHorecast(e, day, forecast);
   });
 });
@@ -311,5 +323,7 @@ const form = document.querySelector(".search-box .search-form");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const forecast = await SearchField.search();
-  if (forecast) fillHourlyHorecast(e, day_0, forecast);
+  if (forecast) {
+    fillHourlyHorecast(e, day_0, forecast);
+  }
 });
