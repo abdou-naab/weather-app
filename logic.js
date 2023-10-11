@@ -1,3 +1,5 @@
+document.cookie = "key=value; SameSite=None; Secure";
+
 const api_key = "?key=bd1cc97dc32d403894f93847230310";
 const base_url = "http://api.weatherapi.com/v1";
 const curr_weather_api = "/current.json";
@@ -245,6 +247,7 @@ const fillHourlyHorecast = async (e, day, forecast) => {
   setField(humidity, forecastDay.avghumidity);
   setField(visibility_c, forecastDay.avgvis_km + " km");
   setField(visibility_f, forecastDay.avgvis_miles + " miles");
+  displayRightDegree();
 };
 
 const day_0 = document.querySelector("[day='0']");
@@ -261,12 +264,35 @@ days.forEach((day) => {
 /**
  * change degree
  */
+const displayRightDegree = () => {
+  const degree = document
+    .querySelector(".active-degree")
+    .getAttribute("degree");
+  const c_spans = document.querySelectorAll(".c");
+  const f_spans = document.querySelectorAll(".f");
+  if (degree == "c") {
+    c_spans.forEach((span) => {
+      span.style.display = "inline";
+    });
+    f_spans.forEach((span) => {
+      span.style.display = "none";
+    });
+  } else {
+    f_spans.forEach((span) => {
+      span.style.display = "inline";
+    });
+    c_spans.forEach((span) => {
+      span.style.display = "none";
+    });
+  }
+};
 const degreeBtn = document.querySelector(".degree");
-const degrees = [...degreeBtn.children];
 degreeBtn.addEventListener("click", (e) => {
-  degrees.forEach((e) => {
-    e.classList.toggle("active-degree");
-  });
+  const span_c = document.querySelector(".degree span[degree = 'c']");
+  const span_f = document.querySelector(".degree span[degree = 'f']");
+  span_c.classList.toggle("active-degree");
+  span_f.classList.toggle("active-degree");
+  displayRightDegree();
 });
 
 const form = document.querySelector(".search-box .search-form");

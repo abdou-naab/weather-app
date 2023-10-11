@@ -24,7 +24,8 @@
         <ul class="suggestions"></ul>
       </div>
       <button class="degree">
-        <span class="c active-degree">°C</span> / <span class="f">°F</span>
+        <span degree="c" class="active-degree">°C</span> /
+        <span degree="f">°F</span>
       </button>
     </header>
     <div class="days-selection flex-row">
@@ -65,7 +66,7 @@
         </div>
       </div>
     </div>
-    <div class="today">
+    <div class="today flex-wrap">
       <div class="flex-row">
         <div class="flex-column sml-img">
           <span>chance of rain</span>
@@ -105,7 +106,7 @@
     </div>
     <div class="today-hourly flex-row"></div>
 
-    <div class="sml-img flex-row">
+    <div class="big-img flex-row">
       <div class="flex-column sunrise">
         <img src="sunrise.png" alt="sunrise" />
         <span></span>
@@ -116,5 +117,8 @@
         <span></span>
       </div>
     </div>
+    <footer class="flex-column">
+      <span>Crafted by Abderrahmane Naab, using weatherapi.com</span>
+    </footer>
   </body>
 </html>
