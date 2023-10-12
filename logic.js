@@ -60,6 +60,37 @@ const getForecastData = (obj) => {
   };
 };
 
+const httpErrorHundler = (() => {
+  const body = document.querySelector("body");
+  const showErrorPage = (msg) => {
+    for (let i = 1; i < body.children.length; i++) {
+      body.children[i].style.display = "none";
+    }
+    let title = document.createElement("span");
+    title.innerText = "Something went wrong";
+    title.classList.add("err-msg", "big-number");
+    let text = document.createElement("p");
+    text.innerText = msg;
+    text.classList.add("err-msg");
+    title.style.color = "var(--red)";
+    text.style.textAlign = "center";
+    title.style.textAlign = "center";
+    body.append(title, text);
+  };
+  const hideErrorPage = () => {
+    const errors = document.querySelectorAll(".err-msg");
+    if (errors.length) {
+      for (let error of errors) {
+        error.remove();
+      }
+      for (let i = 1; i < body.children.length; i++) {
+        body.children[i].style.display = "flex";
+      }
+    }
+  };
+  return { showErrorPage, hideErrorPage };
+})();
+
 const SearchField = (() => {
   const searchField = document.getElementById("search-field");
 
@@ -103,12 +134,12 @@ const SearchField = (() => {
     let response = await fetch(
       base_url + forcast_api + api_key + "&q=" + loc + "&days=3"
     );
-    if (!response.ok) {
-      searchField.value = "";
-      searchField.setAttribute("placeholder", "Enter a valid location!");
+    response = await response.json();
+    if (response.error) {
+      httpErrorHundler.showErrorPage(response.error.message);
       return undefined;
     } else {
-      response = await response.json();
+      httpErrorHundler.hideErrorPage();
       return response;
     }
   }

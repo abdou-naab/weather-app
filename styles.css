@@ -224,3 +224,13 @@ footer {
   width: 7.4rem;
   flex-shrink: 0;
 }
+
+/* .error-page {
+  position: fixed;
+  top: var(--search_form_height);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--white);
+  color: var(--red);
+} */
