@@ -1,6 +1,6 @@
 document.cookie = "key=value; SameSite=None; Secure";
 const api_key = "?key=bd1cc97dc32d403894f93847230310";
-const base_url = "http://api.weatherapi.com/v1";
+const base_url = "https://api.weatherapi.com/v1";
 const curr_weather_api = "/current.json";
 const forcast_api = "/forecast.json";
 const search_api = "/search.json";
