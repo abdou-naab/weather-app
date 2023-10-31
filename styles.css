@@ -110,7 +110,7 @@ header {
 body {
   color: var(--blue1);
   display: grid;
-  grid-template-rows: auto auto 1fr auto 1fr auto 3rem;
+  grid-template-rows: auto auto 1fr auto auto auto 3rem;
   align-items: start;
   font-size: 1.2rem;
 }
@@ -225,12 +225,26 @@ footer {
   flex-shrink: 0;
 }
 
-/* .error-page {
-  position: fixed;
-  top: var(--search_form_height);
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--white);
-  color: var(--red);
-} */
+@media (max-width: 550px) {
+  .logo {
+    grid-area: logo;
+  }
+  .search-box {
+    grid-area: search;
+  }
+  .degree {
+    grid-area: degree;
+  }
+  header {
+    padding-top: 1rem;
+    max-height: 120px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "logo degree "
+      "search search";
+  }
+  #search-field {
+    min-width: 250px;
+  }
+}
